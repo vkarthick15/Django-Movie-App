@@ -11,3 +11,11 @@ data = json.loads(moviesdata)
 def index(request):
      context = {'movies':data}
      return render(request, 'movies\index.html', context)
+
+def show(request,id):
+     singlemovie = list()
+     for movie in singlemovie:
+          if movie['id'] == id:
+               singlemovie = movie
+     context = {'movie':singlemovie}
+     return render(request, 'movies\show.html', context)
