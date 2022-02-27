@@ -12,10 +12,10 @@ def index(request):
      context = {'movies':data}
      return render(request, 'movies\index.html', context)
 
-def show(request,id):
+def show(request,title):
      singlemovie = list()
-     for movie in singlemovie:
-          if movie['id'] == id:
+     for movie in data:
+          if movie['title'] == title:
                singlemovie = movie
      context = {'movie':singlemovie}
      return render(request, 'movies\show.html', context)
