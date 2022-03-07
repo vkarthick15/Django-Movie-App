@@ -1,0 +1,30 @@
+{% extends 'movies/base.html'%}
+{% block title %} Movies {% endblock %}
+
+{% block content %}
+<div>
+<section class="p-5">
+    <div class="text-center text-4xl rounded-lg mx-auto w-fit">
+        <h1 class="p-5 border-4 border-orange-700 rounded-lg shadow-xl shadow-orange-700">Polaroid Movies Hub</h1>
+         </div>
+         <div class="grid grid-cols-4 gap-3 mt-7">
+            {% for movie in movies_list %}
+             <a 
+                href="{% url 'movie.show' movie.id %}" 
+                class="justify-self-center" 
+                target="_blank"
+            >
+            <div class=" h-fit w-48 border border-amber-500 border-4 p-2 rounded-sm mt-10 shadow-xl shadow-orange-700">
+                <div class="text-ellipsis overflow-hidden text-center">
+                    <p>{{ movie.originalTitle }}</p>
+                </div>
+                <div class="bottom-0">
+                    <img src="{{ movie.posterurl }}" width=200 height=200>
+                </div>
+            </div>
+                {% endfor %}
+            </div>
+</section>
+</div>
+
+{% endblock %}

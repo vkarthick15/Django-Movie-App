@@ -1,0 +1,47 @@
+{% extends 'movies/base.html' %}
+
+{% block title %} Movies - {{movie.title}} {% endblock %}
+
+{% block content %}
+<section class="p-5">
+            <div>
+                <div  class="p-3 border-2 border-amber-500 rounded-xl outline-double text-4xl m-auto w-fit bg-zinc-900 ">
+                    <div class="text-center text-10xl rounded-lg ">
+                        <h1 class="text-4xl">{{ movie.title }}</h1>
+                    </div>
+                    <div>
+                        <img class="m-auto mt-5" src="{{ movie.posterurl }}" width=200 height=200>
+                    </div>
+                </div>
+                <div class="mt-5 p-5 border-2 border-amber-500 rounded-lg shadow-xl shadow-orange-700 bg-zinc-900">
+                    <p> PLOT: <p>
+                    <p> &emsp;&emsp;&emsp;{{ movie.storyline }}</p><br>
+                    <p>Release Year: {{ movie.year }}</p><br>
+                    <p>Genres: {{ movie.genres|join:', ' }}</p><br>
+                    <p>Actors: {{ movie.actors|join:', ' }}</p><br>
+                    <p>Duration: {{ movie.duration }}</p><br>
+                    <p>Release Date: {{ movie.releaseDate }}</p><br>
+                    <p>IMDB Rating: {{ movie.imdbRating }}</p><br>
+                </div>
+            </div>
+            <form method="POST" action="{% url 'movie.review' movie.id %}">
+                {% csrf_token %}
+                <div class="flex justify-center">
+                    <textarea 
+                        class="mt-5 p-5 border-2 border-amber-500 rounded-lg shadow-xl shadow-orange-700 bg-zinc-900" placeholder="Write Your Review Here!" name="review"
+                    ></textarea>
+                </div>
+                <div class= "m-auto mt-5 w-fit p-2 border-2 border-amber-500 rounded-lg shadow-xl shadow-orange-700 bg-zinc-900 flex justify-center">     
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+            <div>
+                {% for review in movie.review_set.all %}
+
+                <p>{{ review.body }}</p>
+                
+                {% endfor %}
+            </div>
+        </section>
+{% endblock %}
+        
